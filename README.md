@@ -16,7 +16,7 @@ It builds with GitHub Pages' built-in Jekyll, with no external theme or plugins.
 
 - **Add a project:** add an entry under `projects:` in `_config.yml`, using the format in the comments just above it. Put thumbnails in an `images/` folder.
 - **Add a CV:** upload the PDF as `cv.pdf`, then set `cv: /cv.pdf` in `_config.yml`.
-- **Weekly post front matter:** `layout: post`, `title`, `date`, `count` (number of papers), `summary`, and `tags`.
+- **Weekly post front matter:** `layout: post`, `title`, `date`, `papers` (number of papers; do not name it `count`), `summary`, and `tags`. The `date` must not be in the future, or Jekyll skips the post.
 
 ## Weekly auto-publishing
 
