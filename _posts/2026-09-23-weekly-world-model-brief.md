@@ -2,7 +2,7 @@
 layout: post
 title: "9월 넷째 주 월드모델 논문 요약"
 date: 2026-09-23 09:30:00 +0900
-count: 8
+papers: 8
 summary: "WAM이 확실한 주류로 자리 잡은 한 주. 촉각을 월드 상태로 예측하는 DexTacWAM, 느린 계획과 빠른 보정을 나눈 DualWAM, 그리고 생성한 미래를 행동 선택에 어떻게 쓸지 다룬 연구 두 편."
 tags: ["WAM", "World Model", "VLA", "Planning", "촉각·힘", "증류"]
 ---
