@@ -1,0 +1,50 @@
+# ── Site ─────────────────────────────────────────
+title: Jeon Seungwoo
+name_ko: 전승우
+name_en: Jeon Seungwoo
+affiliation: AirLab, Dongguk University
+tagline: Robot manipulation · World models · Vision-Language-Action
+description: Jeon Seungwoo (전승우), AirLab at Dongguk University. World models and vision-language-action models for robot manipulation.
+url: https://jeonseungwoo1.github.io
+baseurl: ""
+lang: en
+timezone: Asia/Seoul
+
+# ── Contact & links (leave empty to hide) ─────────
+email: swoo1577@gmail.com
+github: Jeonseungwoo1
+scholar: ""      # full Google Scholar URL
+linkedin: ""     # full LinkedIn URL
+cv: ""           # e.g. /cv.pdf (upload the PDF to the repo root first)
+
+# ── Research (home page) ─────────────────────────
+research:
+  - title: World Models for Manipulation
+    body: Learning models that predict how a scene changes in response to actions, and using those predictions for planning and policy learning in robot manipulation.
+  - title: World Action Models
+    body: Unifying future video prediction and action generation in a single generative model, carrying physical priors from video pretraining into robot control.
+  - title: Vision-Language-Action
+    body: Generalization, real-time control, and contact-rich extensions of VLA policies that map vision and language to robot actions.
+
+# ── Projects & papers ────────────────────────────
+# Each entry becomes a card in the Projects section; the section stays hidden while the list is empty.
+# Example (replace `projects: []` with a list like this):
+# projects:
+#   - title: Project title
+#     year: 2026
+#     kind: Paper                 # Paper / Project / Demo
+#     venue: ""                   # conference or journal (optional)
+#     summary: One or two sentences.
+#     image: /images/project-1.jpg  # thumbnail (optional, 16:10)
+#     tags: [World Model, Manipulation]
+#     links:
+#       - { label: Paper, url: "https://arxiv.org/abs/..." }
+#       - { label: Code,  url: "https://github.com/..." }
+#       - { label: Video, url: "https://youtu.be/..." }
+projects: []
+
+# ── Build ────────────────────────────────────────
+markdown: kramdown
+permalink: /weekly/:year/:month/:day/
+exclude:
+  - README.md

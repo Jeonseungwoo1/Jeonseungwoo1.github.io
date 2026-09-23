@@ -1,0 +1,29 @@
+---
+layout: default
+title: Weekly Brief
+permalink: /weekly/
+summary: A weekly digest of arXiv papers on world models, world action models, and VLAs for robot manipulation.
+---
+<section class="shell archive">
+  <p class="eyebrow">Weekly Brief</p>
+  <h1>Weekly Brief</h1>
+  <p class="lede">Every Friday I pick the notable new arXiv papers on world models, world action models (WAMs), and vision-language-action models for robot manipulation, and summarize the problem, method, and results of each in Korean.</p>
+  {% assign byYear = site.posts | group_by_exp: "p", "p.date | date: '%Y'" %}
+  {% for y in byYear %}
+  <h2 class="year">{{ y.name }}</h2>
+  <ol class="arch-list">
+    {% for post in y.items %}
+    <li>
+      <a href="{{ post.url | relative_url }}">
+        <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: '%m.%d' }}</time>
+        <span class="arch-main">
+          <span class="arch-title">{{ post.title }}</span>
+          <span class="arch-sum">{{ post.summary }}</span>
+        </span>
+        {% if post.count %}<span class="arch-n">{{ post.count }} papers</span>{% endif %}
+      </a>
+    </li>
+    {% endfor %}
+  </ol>
+  {% endfor %}
+</section>
