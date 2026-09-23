@@ -1,0 +1,19 @@
+---
+layout: default
+---
+<article class="shell post">
+  <a class="back" href="{{ '/weekly/' | relative_url }}">← All weekly briefs</a>
+  <header class="post-head">
+    <p class="eyebrow">Weekly Brief · <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: '%Y.%m.%d' }}</time>{% if page.count %} · {{ page.count }} papers{% endif %}</p>
+    <h1>{{ page.title }}</h1>
+    {% if page.summary %}<p class="lede">{{ page.summary }}</p>{% endif %}
+    {% if page.tags.size > 0 %}<ul class="tags">{% for t in page.tags %}<li>{{ t }}</li>{% endfor %}</ul>{% endif %}
+  </header>
+  <div class="prose">
+    {{ content }}
+  </div>
+  <nav class="post-nav" aria-label="Previous and next">
+    {% if page.previous %}<a href="{{ page.previous.url | relative_url }}"><small>Previous week</small>{{ page.previous.title }}</a>{% else %}<span></span>{% endif %}
+    {% if page.next %}<a class="next" href="{{ page.next.url | relative_url }}"><small>Next week</small>{{ page.next.title }}</a>{% endif %}
+  </nav>
+</article>
