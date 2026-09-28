@@ -15,7 +15,7 @@ summary: A weekly digest of arXiv papers on world models, world action models, a
     {% for post in y.items %}
     <li>
       <a href="{{ post.url | relative_url }}">
-        <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: '%m.%d' }}</time>
+        <time datetime="{{ post.date | date_to_xmlschema }}"><span class="wk">W{{ post.date | date: '%V' }}</span>{{ post.date | date: '%m.%d' }}</time>
         <span class="arch-main">
           <span class="arch-title">{{ post.title }}</span>
           <span class="arch-sum">{{ post.summary }}</span>

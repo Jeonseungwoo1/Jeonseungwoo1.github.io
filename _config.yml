@@ -3,8 +3,12 @@ title: Jeon Seungwoo
 name_ko: 전승우
 name_en: Jeon Seungwoo
 affiliation: AirLab, Dongguk University
-tagline: Robot manipulation · World models · Vision-Language-Action
-description: Jeon Seungwoo (전승우), AirLab at Dongguk University. World models and vision-language-action models for robot manipulation.
+# Hero line: one phrase per stage (track / predict / act)
+tagline:
+  track: Multi-object tracking
+  predict: World models
+  act: Robot manipulation
+description: Jeon Seungwoo (전승우), AirLab at Dongguk University. From multi-object tracking to object-centric world models for robot manipulation.
 url: https://jeonseungwoo1.github.io
 baseurl: ""
 lang: en
@@ -17,14 +21,24 @@ scholar: ""      # full Google Scholar URL
 linkedin: ""     # full LinkedIn URL
 cv: ""           # e.g. /cv.pdf (upload the PDF to the repo root first)
 
-# ── Research (home page) ─────────────────────────
+# ── Research: Track → Predict → Act (home page) ──
+# stage: track / predict / act (sets the color and icon). status: shown as a small label.
 research:
-  - title: World Models for Manipulation
-    body: Learning models that predict how a scene changes in response to actions, and using those predictions for planning and policy learning in robot manipulation.
-  - title: World Action Models
-    body: Unifying future video prediction and action generation in a single generative model, carrying physical priors from video pretraining into robot control.
-  - title: Vision-Language-Action
-    body: Generalization, real-time control, and contact-rich extensions of VLA policies that map vision and language to robot actions.
+  - stage: track
+    label: Track
+    status: Background
+    title: Multi-Object Tracking
+    body: Keeping persistent identities for many objects through motion and occlusion, so a system knows what is where over time.
+  - stage: predict
+    label: Predict
+    status: Current focus
+    title: Object-Centric World Models
+    body: Extending tracking's motion prediction into action-conditioned models of how objects move and interact when a robot acts on them.
+  - stage: act
+    label: Act
+    status: Current focus
+    title: World Action Models & VLA
+    body: Using those predictions for planning and control in robot manipulation, from world action models to vision-language-action policies.
 
 # ── Projects & papers ────────────────────────────
 # Each entry becomes a card in the Projects section; the section stays hidden while the list is empty.

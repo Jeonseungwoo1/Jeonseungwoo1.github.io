@@ -5,59 +5,119 @@ layout: default
   <div class="shell hero-grid">
     <div class="hero-text">
       <p class="eyebrow">{{ site.affiliation }}</p>
-      <h1 class="hero-name"><span class="ko">{{ site.name_en }}</span><span class="en" lang="ko">{{ site.name_ko }}</span></h1>
-      <p class="hero-tag">{% assign tg = site.tagline | split: " · " %}{% for t in tg %}<span>{{ t }}</span>{% unless forloop.last %} · {% endunless %}{% endfor %}</p>
-      <p class="hero-lede">I study how robots can imagine the outcome of an action before taking it, working on world models and vision-language-action models for manipulation.</p>
+      <h1 class="hero-name"><span class="name-en">{{ site.name_en }}</span><span class="name-ko" lang="ko">{{ site.name_ko }}</span></h1>
+      <p class="hero-flow" aria-label="{{ site.tagline.track }}, then {{ site.tagline.predict }}, then {{ site.tagline.act }}">
+        <span class="s-track">{{ site.tagline.track }}</span><span class="arrow" aria-hidden="true">→</span><span class="s-predict">{{ site.tagline.predict }}</span><span class="arrow" aria-hidden="true">→</span><span class="s-act">{{ site.tagline.act }}</span>
+      </p>
+      <p class="hero-lede">From tracking what is where to predicting what happens next. I study object-centric world models for robot manipulation, building on my background in multi-object tracking.</p>
       <div class="hero-cta">
-        <a class="btn primary" href="{{ '/weekly/' | relative_url }}">Weekly Brief</a>
-        <a class="btn" href="#contact">Get in touch</a>
-        {% if site.cv != "" %}<a class="btn" href="{{ site.cv | relative_url }}">CV</a>{% endif %}
+        <a class="btn primary" href="#research">Research</a>
+        <a class="btn" href="{{ '/weekly/' | relative_url }}">Weekly Brief</a>
+        <a class="btn ghost" href="#contact">Contact</a>
+        {% if site.cv != "" %}<a class="btn ghost" href="{{ site.cv | relative_url }}">CV</a>{% endif %}
       </div>
     </div>
-    <figure class="hero-fig" aria-hidden="true">
-      <svg viewBox="0 0 340 300" role="img">
-        <line class="table" x1="20" y1="282" x2="330" y2="282"/>
-        <rect class="obj" x="250" y="258" width="24" height="24" rx="3"/>
-        <path class="traj" d="M265.2 163.7 C 274 185, 274 215, 268.8 257.4"/>
-        <g class="ghost g3"><polyline points="90,262 173.2,187.1 264.1,223.8 268.8,257.4"/><circle cx="173.2" cy="187.1" r="5"/><circle cx="264.1" cy="223.8" r="5"/></g>
-        <g class="ghost g2"><polyline points="90,262 164.9,178.8 260.8,199.1 272.4,231.1"/><circle cx="164.9" cy="178.8" r="5"/><circle cx="260.8" cy="199.1" r="5"/></g>
-        <g class="ghost g1"><polyline points="90,262 154.2,170.3 252.2,170.3 271.7,198.1"/><circle cx="154.2" cy="170.3" r="5"/><circle cx="252.2" cy="170.3" r="5"/></g>
-        <g class="arm"><polyline points="90,262 142.6,163.1 238.4,142.7 265.2,163.7"/><circle cx="142.6" cy="163.1" r="6.5"/><circle cx="238.4" cy="142.7" r="6.5"/></g>
-        <rect class="base" x="66" y="262" width="48" height="20" rx="3"/>
-        <circle class="base-j" cx="90" cy="262" r="8"/>
-        <text class="lbl" x="276" y="160">t</text>
-        <text class="lbl dim" x="282" y="200">t+1</text>
-        <text class="lbl dim" x="282" y="234">t+2</text>
-        <text class="lbl dim" x="226" y="255" text-anchor="end">t+3</text>
-        <text class="cap" x="20" y="30">imagined rollout</text>
-        <text class="cap dim" x="20" y="46">p(o<tspan baseline-shift="sub" font-size="8">t+1:t+k</tspan> | o<tspan baseline-shift="sub" font-size="8">t</tspan>, a<tspan baseline-shift="sub" font-size="8">t:t+k</tspan>)</text>
+
+    <figure class="scene">
+      <svg viewBox="0 100 520 196" role="img" aria-labelledby="scene-title">
+        <title id="scene-title">Two tracked objects with their past positions, predicted future positions, and a robot arm grasping one object where it will be at t+3.</title>
+        <defs>
+          <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" class="grid"/></pattern>
+        </defs>
+        <rect x="16" y="104" width="488" height="182" fill="url(#grid)"/>
+        <g class="frame">
+          <path d="M16 124V104H36"/><path d="M484 104H504V124"/><path d="M16 266V286H36"/><path d="M504 266V286H484"/>
+        </g>
+        <text class="hud" x="28" y="120">cam 0 · frame t</text>
+
+        <line class="lane" x1="30" y1="250" x2="490" y2="250"/>
+        <line class="lane dim" x1="30" y1="196" x2="260" y2="196"/>
+
+        <!-- ID 2 (back lane): track + predict -->
+        <polyline class="trail" points="56,179 80,179 104,179 128,179"/>
+        <circle class="past" cx="56" cy="179" r="2.5"/><circle class="past" cx="80" cy="179" r="2.5"/><circle class="past" cx="104" cy="179" r="2.5"/>
+        <rect class="ghost g1" x="140" y="162" width="24" height="34" rx="5"/>
+        <rect class="ghost g2" x="164" y="162" width="24" height="34" rx="5"/>
+        <rect class="obj" x="116" y="162" width="24" height="34" rx="5"/>
+        <path class="bbox" d="M111 165V157H119 M137 157H145V165 M111 193V201H119 M137 201H145V193"/>
+        <rect class="tag" x="111" y="143" width="34" height="13" rx="2"/>
+        <text class="tag-t" x="128" y="152.5" text-anchor="middle">ID 2</text>
+
+        <!-- ID 1 (front lane): track + predict -->
+        <polyline class="trail" points="70,234 110,234 150,234 190,234"/>
+        <circle class="past" cx="70" cy="234" r="3"/><circle class="past" cx="110" cy="234" r="3"/><circle class="past" cx="150" cy="234" r="3"/>
+        <rect class="ghost g1" x="212" y="218" width="36" height="32" rx="3"/>
+        <rect class="ghost g2" x="252" y="218" width="36" height="32" rx="3"/>
+        <rect class="ghost g3" x="292" y="218" width="36" height="32" rx="3"/>
+        <rect class="obj" x="172" y="218" width="36" height="32" rx="3"/>
+        <path class="bbox" d="M167 221V213H175 M205 213H213V221 M167 247V255H175 M205 255H213V247"/>
+        <rect class="tag" x="167" y="199" width="34" height="13" rx="2"/>
+        <text class="tag-t" x="184" y="208.5" text-anchor="middle">ID 1</text>
+
+        <!-- time axis under the front lane -->
+        <g class="axis">
+          <text x="70" y="270" text-anchor="middle">t−3</text><text x="110" y="270" text-anchor="middle">t−2</text><text x="150" y="270" text-anchor="middle">t−1</text>
+          <text class="now" x="190" y="270" text-anchor="middle">t</text>
+          <text class="fut" x="230" y="270" text-anchor="middle">t+1</text><text class="fut" x="270" y="270" text-anchor="middle">t+2</text><text class="fut" x="310" y="270" text-anchor="middle">t+3</text>
+        </g>
+
+        <!-- act: robot arm grasping ID 1 at t+3 -->
+        <g class="target">
+          <circle cx="310" cy="234" r="11"/>
+          <path d="M310 219V226 M310 242V249 M295 234H302 M318 234H325"/>
+        </g>
+        <text class="act-t" x="336" y="238">grasp @ t+3</text>
+        <g class="arm">
+          <polyline points="450,232 418,148 338,132 310,172"/>
+          <path class="grip" d="M296 204V180H324V204"/>
+          <circle cx="418" cy="148" r="6"/><circle cx="338" cy="132" r="6"/>
+        </g>
+        <rect class="base" x="428" y="232" width="44" height="18" rx="3"/>
+        <circle class="base-j" cx="450" cy="232" r="7"/>
       </svg>
+      <figcaption class="legend">
+        <span class="lg lg-track"><i></i>Track: identities over time</span>
+        <span class="lg lg-predict"><i></i>Predict: future states</span>
+        <span class="lg lg-act"><i></i>Act: plan where it will be</span>
+      </figcaption>
     </figure>
   </div>
 </section>
 
 <section class="block" id="research">
   <div class="shell">
-    <h2 class="sec">Research</h2>
-    <div class="research">
+    <div class="sec-head">
+      <h2 class="sec">Research</h2>
+      <p class="sec-sub">Track <span aria-hidden="true">→</span> Predict <span aria-hidden="true">→</span> Act</p>
+    </div>
+    <ol class="pipeline">
       {% for r in site.research %}
-      <article class="r-item">
+      <li class="stage stage-{{ r.stage }}">
+        <div class="stage-head">
+          <span class="stage-icon" aria-hidden="true">
+            {% if r.stage == 'track' %}<svg viewBox="0 0 24 24"><path d="M3 8V3H8 M16 3H21V8 M3 16V21H8 M16 21H21V16"/><rect x="8" y="8" width="8" height="8" rx="1.5"/></svg>
+            {% elsif r.stage == 'predict' %}<svg viewBox="0 0 24 24"><rect x="2.5" y="8" width="7" height="8" rx="1.5"/><rect class="d" x="14.5" y="8" width="7" height="8" rx="1.5"/><path class="d" d="M10 12H14"/></svg>
+            {% else %}<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="6.5"/><path d="M12 2.5V7 M12 17V21.5 M2.5 12H7 M17 12H21.5"/></svg>{% endif %}
+          </span>
+          <span class="stage-label">{{ forloop.index }} · {{ r.label }}</span>
+          {% if r.status %}<span class="stage-status">{{ r.status }}</span>{% endif %}
+        </div>
         <h3>{{ r.title }}</h3>
         <p>{{ r.body }}</p>
-      </article>
+      </li>
       {% endfor %}
-    </div>
+    </ol>
   </div>
 </section>
 
 {% if site.projects and site.projects.size > 0 %}
 <section class="block" id="projects">
   <div class="shell">
-    <h2 class="sec">Projects</h2>
+    <div class="sec-head"><h2 class="sec">Projects</h2></div>
     <div class="projects">
       {% for p in site.projects %}
-      <article class="proj">
-        {% if p.image %}<div class="proj-img"><img src="{{ p.image | relative_url }}" alt="{{ p.title }}" loading="lazy"></div>{% else %}<div class="proj-img empty"></div>{% endif %}
+      <article class="proj boxed">
+        {% if p.image %}<div class="proj-img"><img src="{{ p.image | relative_url }}" alt="{{ p.title }}" loading="lazy"></div>{% endif %}
         <div class="proj-body">
           <p class="proj-meta">{{ p.kind }}{% if p.venue and p.venue != "" %} · {{ p.venue }}{% endif %} · {{ p.year }}</p>
           <h3>{{ p.title }}</h3>
@@ -74,7 +134,7 @@ layout: default
 
 <section class="block" id="weekly">
   <div class="shell">
-    <div class="sec-row">
+    <div class="sec-head">
       <h2 class="sec">Weekly Brief</h2>
       <a class="more" href="{{ '/weekly/' | relative_url }}">View all →</a>
     </div>
@@ -82,8 +142,8 @@ layout: default
     {% if site.posts.size > 0 %}
     <div class="briefs">
       {% for post in site.posts limit:3 %}
-      <a class="brief-card" href="{{ post.url | relative_url }}">
-        <p class="eyebrow"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: '%Y.%m.%d' }}</time>{% if post.papers %} · {{ post.papers }} papers{% endif %}</p>
+      <a class="brief-card boxed" href="{{ post.url | relative_url }}">
+        <p class="brief-meta"><span class="wk">W{{ post.date | date: '%V' }}</span><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: '%Y.%m.%d' }}</time>{% if post.papers %}<span>{{ post.papers }} papers</span>{% endif %}</p>
         <h3>{{ post.title }}</h3>
         <p>{{ post.summary }}</p>
         {% if post.tags.size > 0 %}<ul class="tags">{% for t in post.tags limit:4 %}<li>{{ t }}</li>{% endfor %}</ul>{% endif %}
@@ -95,8 +155,8 @@ layout: default
 </section>
 
 <section class="block" id="contact">
-  <div class="shell contact">
-    <h2 class="sec">Contact</h2>
+  <div class="shell">
+    <div class="sec-head"><h2 class="sec">Contact</h2></div>
     <dl class="contact-list">
       <dt>Email</dt><dd><span class="sel">{{ site.email }}</span></dd>
       <dt>Affiliation</dt><dd>{{ site.affiliation }}</dd>
